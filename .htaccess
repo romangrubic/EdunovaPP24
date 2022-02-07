@@ -1,0 +1,11 @@
+# enable URL rewrite
+RewriteEngine On
+
+# skip if FILE exists 
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# skip if DIRECTORY exists
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# everything goes to Index.php
+RewriteRule (.*) index.php [L,E=PATH_INFO:/$1]
