@@ -9,7 +9,7 @@ class App
 
         $dijelovi = explode(DIRECTORY_SEPARATOR, $ruta);
 
-        // echo $dijelovi
+        // print_r($dijelovi);
 
         $klasa = '';
         if (!isset($dijelovi[1]) || $dijelovi[1] === '') {
@@ -22,10 +22,11 @@ class App
 
         // echo $klasa;
 
+        $metoda = '';
         if (!isset($dijelovi[2]) || $dijelovi[2] === '') {
             $metoda = 'index';
         } else {
-            $metoda = $dijelovi;
+            $metoda = $dijelovi[2];
         }
 
         // echo $klasa . '->' . $metoda . '()';
