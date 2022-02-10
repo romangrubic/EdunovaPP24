@@ -27,4 +27,19 @@ class VjezbaController
             'gradovi'=>$niz
         ]);
     }
+
+    public function primjer3()
+    {
+        $parniBrojevi=[];
+        for($i=1;$i<99;$i++){
+            if($i%2===0){
+                $parniBrojevi[]=$i;
+            }
+        }
+
+        $view = new View();
+        $view->render('primjer3',[
+            'parniBrojevi'=>$parniBrojevi
+        ]);
+    }
 }
