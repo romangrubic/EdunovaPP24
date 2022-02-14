@@ -1,6 +1,6 @@
 <?php
 
-class VjezbaController
+class VjezbaController extends Controller
 {
     public function primjer1()
     {
@@ -19,8 +19,7 @@ class VjezbaController
         ];
         shuffle($niz);
 
-        $view = new View();
-        $view->render('ispisParametara',[
+        $this->view->render('ispisParametara',[
             'slucajniBroj'=>$sb,
             'skola'=>$ime,
             'voditelj'=>$o,
@@ -37,8 +36,7 @@ class VjezbaController
             }
         }
 
-        $view = new View();
-        $view->render('primjer3',[
+        $this->view->render('primjer3',[
             'parniBrojevi'=>$parniBrojevi
         ]);
     }
