@@ -2,6 +2,8 @@
 
 class VjezbaController extends Controller
 {
+    private $viewDir = 'vjezbanje' . DIRECTORY_SEPARATOR;
+
     public function primjer1()
     {
         echo 'Edunova';
@@ -19,7 +21,7 @@ class VjezbaController extends Controller
         ];
         shuffle($niz);
 
-        $this->view->render('ispisParametara',[
+        $this->view->render($this->viewDir . 'ispisParametara',[
             'slucajniBroj'=>$sb,
             'skola'=>$ime,
             'voditelj'=>$o,
@@ -36,7 +38,7 @@ class VjezbaController extends Controller
             }
         }
 
-        $this->view->render('primjer3',[
+        $this->view->render($this->viewDir . 'primjer3',[
             'parniBrojevi'=>$parniBrojevi
         ]);
     }
