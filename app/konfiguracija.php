@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'url'=>'http://edunova.xyz'
+    'url'=>'http://edunovaapp.xyz/'
 ];
