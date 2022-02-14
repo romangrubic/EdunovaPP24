@@ -43,4 +43,10 @@ class App
         // $kontroler = new IndexController();
         // $kontroler->index();
     }
+
+    public static function config($kljuc)
+    {
+        $config = include BP_APP . 'konfiguracija.php';
+        return $config[$kljuc];
+    }
 }
