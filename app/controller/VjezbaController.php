@@ -42,4 +42,12 @@ class VjezbaController extends Controller
             'parniBrojevi'=>$parniBrojevi
         ]);
     }
+
+    public function testbaza()
+    {
+        $veza = DB::getInstanca();
+        $izraz = $veza->prepare('select * from smjer');
+        $izraz->execute();
+        print_r($izraz->fetchAll());
+    }
 }

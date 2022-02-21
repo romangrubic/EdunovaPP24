@@ -3,7 +3,13 @@
 return [
     'dev'=>true,
     'url'=>'http://edunovaapp.xyz/',
-    'naslovApp'=>'Edunova APP'
+    'naslovApp'=>'Edunova APP',
+    'baza'=>[
+        'server'=>'localhost',
+        'baza'=>'edunovapp24',
+        'korisnik'=>'edunova',
+        'lozinka'=>'edunova'
+    ]
 ];
 
 // Za production
