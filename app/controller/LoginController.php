@@ -32,6 +32,22 @@ class LoginController extends Controller
             return;
         }
 
-        echo 'Uspjesno ste ulogirani!';
+        $operater=Operater::autoriziraj($_POST['email'], $_POST['lozinka']);
+
+        if($operater==null){
+            $this->loginView('Neispravna kombinacija email i lozinka', $_POST['email']);
+            return;
+        }
+
+        $_SESSION['autoriziran']=$operater;
+        $np = new NadzornaplocaController();
+        $np->index();
+    }
+
+    public function odjava()
+    {
+        unset($_SESSION['autoriziran']);
+        session_destroy();
+        $this->loginView('Uspjesno ste odjavljeni', '');
     }
 }

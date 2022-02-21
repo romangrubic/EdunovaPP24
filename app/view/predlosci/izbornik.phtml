@@ -21,7 +21,11 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
+      <?php if(App::autoriziran()): ?>
+      <li><a href="<?= App::config('url') ?>login/odjava">Odjava</a></li>
+      <?php else:?>
       <li><a href="<?= App::config('url') ?>login/index">Login</a></li>
+      <?php endif;?>
     </ul>
   </div>
 </div>
