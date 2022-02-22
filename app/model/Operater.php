@@ -16,7 +16,7 @@ class Operater
             return null;
         }
 
-        if (password_verify($lozinka, $operater->lozinka)){
+        if (!password_verify($lozinka, $operater->lozinka)){
             return null;
         }
 
