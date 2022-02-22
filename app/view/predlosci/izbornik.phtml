@@ -8,6 +8,9 @@
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text"><?= App::config('naslovApp') ?></li>
       <li><a href="<?= App::config('url') ?>">Početna</a></li>
+      <?php if(App::autoriziran()):?>
+          <li><a href="<?= App::config('url') ?>nadzornaploca/index">Nadzorna Ploca</a></li>
+      <?php endif;?>
       <li class="has-submenu">
         <a href="#0">Vjezbanje</a>
         <ul class="submenu menu vertical" data-submenu>
@@ -16,13 +19,22 @@
           <li><a href="<?= App::config('url') ?>vjezba/primjer3">Primjer3</a></li>
         </ul>
       </li>
-      <li><a href="#0">Three</a></li>
+      <?php if(App::autoriziran()):?>
+        <li><a href="#">Program</a>
+          <ul class="submenu menu vertical" data-submenu>
+            <li><a href="<?= App::config('url') ?>smjer/index">Smjerovi</a></li>
+            <li><a href="<?= App::config('url') ?>polaznik/index">Polaznici</a></li>
+            <li><a href="<?= App::config('url') ?>predavac/index">Predavaci</a></li>
+            <li><a href="<?= App::config('url') ?>grupe/index">Grupe</a></li>
+          </ul>
+        </li>
+        <?php endif;?>
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
       <?php if(App::autoriziran()): ?>
-      <li><a href="<?= App::config('url') ?>login/odjava">Odjava</a></li>
+      <li><a href="<?= App::config('url') ?>login/odjava">Odjava <?= $_SESSION['autoriziran']->ime ?></a></li>
       <?php else:?>
       <li><a href="<?= App::config('url') ?>login/index">Login</a></li>
       <?php endif;?>
