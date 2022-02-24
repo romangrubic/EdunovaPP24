@@ -6,6 +6,9 @@ create database edunovapp24 character set utf8mb4;
 
 use edunovapp24;
 
+#za server
+alter database eter_shop character set utf8mb4;
+
 create table operater(
     sifra           int not null primary key auto_increment,
     email           varchar(50) not null,
