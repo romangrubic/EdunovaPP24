@@ -1,3 +1,11 @@
+<div class="grid-x">
+    <div class="cell large-6">
+        <h1 style="font-size: 1.5rem;">Smjerovi</h1>
+    </div>
+    <div class="cell large-6" style="text-align: right;">
+        <a href="<?=App::config('url')?>smjer/novi"><i style="color: green;" title="Dodaj novi." class="fas fa-2x fa-plus-circle"></i></a>
+    </div>
+</div>
 <table>
     <thead>
         <tr>
@@ -14,8 +22,21 @@
                 <td><?=$smjer->naziv?></td>
                 <td><?=$smjer->trajanje?></td>
                 <td><?=$smjer->cijena?></td>
-                <td><?=$smjer->certificiran?></td>
-                <td>Akcija</td>
+                <td>
+                    <?php if($smjer->certificiran):?>
+                        <i style="color: green;" class="fas fa-certificate"></i>   
+                    <?php else:?>
+                        <i style="color: gray;" class="fas fa-certificate"></i>   
+                    <?php endif;?>
+                </td>
+                <td>
+                    <a href="<?=App::config('url')?>smjer/promjena/<?=$smjer->sifra?>"><i title="Promijeni &quot;<?=$smjer->naziv?>&quot;." class="fas fa-2x fa-edit"></i></a>
+                    <?php if($smjer->grupa == 0):?>
+                        <a style="margin-left: 20px; color: red;" href="<?=App::config('url')?>smjer/brisanje/<?=$smjer->sifra?>"><i title="Obriši &quot;<?=$smjer->naziv?>&quot;." class="fas fa-2x fa-trash"></i></a>
+                    <?php else:?>
+                        <i style="margin-left: 20px; color: gray;" title="Ne moze se obrisati &quot;<?=$smjer->naziv?>&quot; jer ima grupe." class="fas fa-2x fa-trash"></i>
+                    <?php endif;?>
+                </td>
             </tr>
         <?php endforeach;?>
     </tbody>
