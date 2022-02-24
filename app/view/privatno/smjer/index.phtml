@@ -1,1 +1,23 @@
-Rad s smjerovima.
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Trajanje</th>
+            <th>Cijena</th>
+            <th>Certificiran</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($smjerovi as $smjer):?>
+            <tr>
+                <td><?=$smjer->naziv?></td>
+                <td><?=$smjer->trajanje?></td>
+                <td><?=$smjer->cijena?></td>
+                <td><?=$smjer->certificiran?></td>
+                <td>Akcija</td>
+            </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
+

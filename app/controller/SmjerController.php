@@ -7,6 +7,8 @@ class SmjerController extends AutorizacijaController
 
     public function index()
     {
-        $this->view->render($this->viewDir . 'index');
+        $this->view->render($this->viewDir . 'index',[
+            'smjerovi'=>Smjer::read()
+        ]);
     }
 }
