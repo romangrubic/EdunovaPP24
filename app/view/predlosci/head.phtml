@@ -4,3 +4,5 @@
 <title><?=App::config('naslovApp')?></title>
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/foundation.css">
 <link rel="stylesheet" href="<?=App::config('url')?>public/css/app.css"> 
+<!-- Ako stranica ima CSS postavljen u parametrima, loadat ce i taj CSS -->
+<?php if(isset($css)) echo $css;?>

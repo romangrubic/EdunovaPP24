@@ -20,7 +20,7 @@
         <?php foreach($smjerovi as $smjer):?>
             <tr>
                 <td><?=$smjer->naziv?></td>
-                <td><?=$smjer->trajanje?></td>
+                <td style="text-align: right;"><?=$smjer->trajanje?></td>
                 <td><?=$smjer->cijena?></td>
                 <td>
                     <?php if($smjer->certificiran):?>
