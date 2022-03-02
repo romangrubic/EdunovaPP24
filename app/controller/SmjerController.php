@@ -27,4 +27,10 @@ class SmjerController extends AutorizacijaController
             'css'=> '<link rel="stylesheet" href="' . App::config('url') . 'public/css/smjerindex.css">'
         ]);
     }
+
+    public function brisanje($sifra)
+    {
+        Smjer::delete($sifra);
+        $this->index();
+    }
 }

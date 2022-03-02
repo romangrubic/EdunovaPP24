@@ -32,7 +32,7 @@
                 <td>
                     <a href="<?=App::config('url')?>smjer/promjena/<?=$smjer->sifra?>"><i title="Promijeni &quot;<?=$smjer->naziv?>&quot;." class="fas fa-2x fa-edit"></i></a>
                     <?php if($smjer->grupa == 0):?>
-                        <a style="margin-left: 20px; color: red;" href="<?=App::config('url')?>smjer/brisanje/<?=$smjer->sifra?>"><i title="Obriši &quot;<?=$smjer->naziv?>&quot;." class="fas fa-2x fa-trash"></i></a>
+                        <a onclick="return confirm('Sigurno obrisati <?=$smjer->naziv?> ?')" style="margin-left: 20px; color: red;" href="<?=App::config('url')?>smjer/brisanje/<?=$smjer->sifra?>"><i title="Obriši &quot;<?=$smjer->naziv?>&quot;." class="fas fa-2x fa-trash"></i></a>
                     <?php else:?>
                         <i style="margin-left: 20px; color: gray;" title="Ne moze se obrisati &quot;<?=$smjer->naziv?>&quot; jer ima grupe." class="fas fa-2x fa-trash"></i>
                     <?php endif;?>
