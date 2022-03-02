@@ -28,6 +28,17 @@ class SmjerController extends AutorizacijaController
         ]);
     }
 
+    public function novi()
+    {
+        $this->view->render($this->viewDir . 'novi');
+    }
+
+    public function dodajNovi()
+    {
+        Smjer::create($_POST);
+        $this->index();
+    }
+
     public function brisanje($sifra)
     {
         Smjer::delete($sifra);

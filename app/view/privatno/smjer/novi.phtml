@@ -1,0 +1,29 @@
+<form action="<?= App::config('url') ?>smjer/dodajNovi" method="post">
+    <fieldset>
+        <legend>Dodavanje novog smjera.</legend>
+        <label for="naziv">Naziv</label>
+        <input type="text" name="naziv" id="naziv">
+
+        <label for="trajanje">Trajanje</label>
+        <input type="number" name="trajanje" id="trajanje">
+
+        <label for="cijena">Cijena</label>
+        <input type="text" name="cijena" id="cijena">
+
+        <p>Certificiran</p>
+        <input type="radio" name="certificiran" id="da" value="1">
+        <label for="da">Da</label>
+        <br>
+        <input type="radio" name="certificiran" id="ne" checked="checked" value="0">
+        <label for="ne">Ne</label>
+
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 cell">
+                <a href="<?= App::config('url') ?>smjer/index" class="alert button expanded">Odustani</a>
+            </div>
+            <div class="large-6 cell">
+        <input type="submit" class="succes button expanded" value="Dodaj novi">
+            </div>
+        </div>
+    </fieldset>
+</form>

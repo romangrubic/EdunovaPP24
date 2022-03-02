@@ -5,6 +5,16 @@ class Smjer
     // CRUD
 
     // Create
+    public static function create($parametri)
+    {
+        $veza = DB::getInstanca();
+        $izraz = $veza->prepare('
+
+        insert into smjer (naziv,trajanje, cijena, certificiran) values (:naziv,:trajanje, :cijena, :certificiran);
+
+        ');
+        $izraz->execute($parametri);
+    }
 
     // Read
     public static function read()
@@ -23,8 +33,9 @@ class Smjer
 
         return $izraz->fetchAll();
     }
+    
     // Update
-
+    
     // Delete
     public static function delete($sifra)
     {
