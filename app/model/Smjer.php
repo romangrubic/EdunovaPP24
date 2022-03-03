@@ -10,7 +10,8 @@ class Smjer
         $veza = DB::getInstanca();
         $izraz = $veza->prepare('
 
-        insert into smjer (naziv,trajanje, cijena, certificiran) values (:naziv,:trajanje, :cijena, :certificiran);
+        insert into smjer (naziv,trajanje, cijena, certificiran)
+         values (:naziv,:trajanje,:cijena,:certificiran);
 
         ');
         $izraz->execute($parametri);

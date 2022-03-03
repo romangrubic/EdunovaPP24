@@ -2,19 +2,21 @@
     <fieldset>
         <legend>Dodavanje novog smjera.</legend>
         <label for="naziv">Naziv</label>
-        <input type="text" name="naziv" id="naziv">
+        <input type="text" name="naziv" id="naziv" value="<?=$smjer->naziv?>">
 
         <label for="trajanje">Trajanje</label>
-        <input type="number" name="trajanje" id="trajanje">
+        <input type="number" name="trajanje" id="trajanje" value="<?=$smjer->trajanje?>">
 
         <label for="cijena">Cijena</label>
-        <input type="text" name="cijena" id="cijena">
+        <input type="text" name="cijena" id="cijena" value="<?=$smjer->cijena?>">
 
         <p>Certificiran</p>
-        <input type="radio" name="certificiran" id="da" value="1">
+        <input type="radio" name="certificiran" id="da" 
+        <?php if($smjer->certificiran) echo 'checked="checked"' ?> value="1">
         <label for="da">Da</label>
         <br>
-        <input type="radio" name="certificiran" id="ne" checked="checked" value="0">
+        <input type="radio" name="certificiran" id="ne" 
+        <?php if(!$smjer->certificiran) echo 'checked="checked"' ?> value="0">
         <label for="ne">Ne</label>
 
         <div class="grid-x grid-padding-x">
@@ -25,5 +27,6 @@
         <input type="submit" class="succes button expanded" value="Dodaj novi">
             </div>
         </div>
+        <?=$poruka?>
     </fieldset>
 </form>
