@@ -43,20 +43,30 @@ class SmjerController extends AutorizacijaController
         ]);
     }
 
+    public function promjena($id)
+    {
+        $this->smjer = Smjer::readOne($id);
+
+        if($this->smjer->cijena==0){
+            $this->smjer->cijena = '';
+        }else{
+            $this->smjer->cijena = $this->nf->format($this->smjer->cijena);
+        }
+
+        $this->view->render($this->viewDir . 'promjena',[
+            'poruka'=>'Promjenite podatke',
+            'smjer'=>$this->smjer
+        ]);
+    }
+
     public function dodajNovi()
     {
-        $this->smjer = (object)$_POST;
-
-        if($this->smjer->certificiran == '1'){
-            $this->smjer->certificiran = true;
-        } else {
-            $this->smjer->certificiran = false;
-        }
+        $this->pripremiPodatke();        
 
         if($this->kontrolaNaziv()
         && $this->kontrolaTrajanje()
         && $this->kontrolaCijena()){
-            Smjer::create($_POST);
+            Smjer::create((array)$this->smjer);
             $this->index();
         }else{
             $this->view->render($this->viewDir . 'novi', [
@@ -67,7 +77,40 @@ class SmjerController extends AutorizacijaController
         
     }
 
+    public function promjeni()
+    {
+        $this->pripremiPodatke();
+
+        if($this->kontrolaNaziv()
+        && $this->kontrolaTrajanje()
+        && $this->kontrolaCijena()){
+            Smjer::update((array)$this->smjer);
+            $this->index();
+        }else{
+            $this->view->render($this->viewDir . 'promjena', [
+                'poruka' => $this->poruka,
+                'smjer' => $this->smjer
+            ]);
+        }
+    }
+
+    public function brisanje($sifra)
+    {
+        Smjer::delete($sifra);
+        $this->index();
+    }
+
     // Kontrole ispravnosti za formu
+    private function pripremiPodatke()
+    {
+        $this->smjer=(object)$_POST;
+        if($this->smjer->certificiran == '1'){
+            $this->smjer->certificiran = true;
+        } else {
+            $this->smjer->certificiran = 0;
+        }
+    }
+
     private function kontrolaNaziv()
     {
         if(strlen($this->smjer->naziv)===0){
@@ -100,8 +143,10 @@ class SmjerController extends AutorizacijaController
     private function kontrolaCijena()
     {
         if(strlen(trim($this->smjer->cijena)) > 0){
-            $broj = (float) trim($this->smjer->cijena);
-            if($broj <= 0){
+            $this->smjer->cijena = str_replace('.','',$this->smjer->cijena);
+            $this->smjer->cijena = (float)str_replace(',','.',$this->smjer->cijena);
+            
+            if($this->smjer->cijena <= 0){
                 $this->poruka = 'Ako unosite cijenu mora biti decimalni broj veci od 0, unijeli ste ' . $this->smjer->cijena;
                 $this->smjer->cijena = 1.00;
             return false;
@@ -110,9 +155,5 @@ class SmjerController extends AutorizacijaController
         return true;
     }
 
-    public function brisanje($sifra)
-    {
-        Smjer::delete($sifra);
-        $this->index();
-    }
+    
 }
