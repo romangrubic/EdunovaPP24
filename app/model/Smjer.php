@@ -3,6 +3,17 @@
 class Smjer
 {
     // CRUD
+    public static function readOne($kljuc)
+    {
+        $veza = DB::getInstanca();
+        $izraz = $veza->prepare('
+        
+            select * from smjer where sifra=:parametar;
+        
+        '); 
+        $izraz->execute(['parametar'=>$kljuc]);
+        return $izraz->fetch();
+    }
 
     // Create
     public static function create($parametri)
@@ -36,6 +47,23 @@ class Smjer
     }
     
     // Update
+    
+    public static function update($parametri)
+    {
+        $veza = DB::getInstanca();
+        $izraz = $veza->prepare('
+        
+            update smjer set 
+                naziv=:naziv,
+                trajanje=:trajanje,
+                cijena=:cijena,
+                certificiran=:certificiran
+                where sifra=:sifra;
+        
+        '); 
+        $izraz->execute($parametri);
+
+    }
     
     // Delete
     public static function delete($sifra)
