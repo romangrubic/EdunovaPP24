@@ -6,6 +6,15 @@ class PredavacController extends AutorizacijaController
 
     public function index()
     {
-        $this->view->render($this->viewDir . 'index');
+        $this->view->render($this->viewDir . 'index', [
+            'predavaci'=>Predavac::read()
+        ]);
     }
+
+    public function brisanje($sifra)
+    {
+        Predavac::delete($sifra);
+        header('location:' . App::config('url') . 'predavac/index');
+    }
+
 }
