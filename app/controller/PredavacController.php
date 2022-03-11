@@ -45,8 +45,16 @@ class PredavacController extends AutorizacijaController
     public function akcija()
     {
         if($_POST['sifra']==0){
-            // prvo kontrole
-            Predavac::create($_POST);
+            if($this->kontrolaOIB($_POST['oib'])){
+                Predavac::create($_POST);
+            }else{
+                $this->view->render($this->viewDir . 'detalji', [
+                    'predavac'=>(object)$_POST,
+                    'poruka'=>'Neispravan OIB',
+                    'akcija'=>'Dodaj novi.'
+                ]);
+                return;
+            }
         }else{
             // Prvo kontrole
             Predavac::update($_POST);
@@ -60,4 +68,30 @@ class PredavacController extends AutorizacijaController
         header('location:' . App::config('url') . 'predavac/index');
     }
 
+    private function kontrolaOIB($oib) {
+
+        if (strlen($oib) != 11 || !is_numeric($oib)) {
+            return false;
+        }
+
+        $a = 10;
+
+        for ($i = 0; $i < 10; $i++) {
+
+            $a += (int)$oib[$i];
+            $a %= 10;
+
+            if ( $a == 0 ) { $a = 10; }
+
+            $a *= 2;
+            $a %= 11;
+
+        }
+
+        $kontrolni = 11 - $a;
+
+        if ( $kontrolni == 10 ) { $kontrolni = 0; }
+
+        return $kontrolni == intval(substr($oib, 10, 1), 10);
+    }
 }
