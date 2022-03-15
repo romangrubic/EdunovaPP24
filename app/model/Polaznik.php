@@ -20,8 +20,11 @@ class Polaznik
     // CRUD
 
     //R - Read
-    public static function read()
+    public static function read($stranica, $uvjet)
     {
+        $rps = App::config('rps');
+        $od = $stranica * $rps - $rps;
+
         $veza = DB::getInstanca();
         $izraz = $veza->prepare('
         
@@ -29,10 +32,16 @@ class Polaznik
         from polaznik a
         inner join osoba b on a.osoba=b.sifra
         left join clan c on a.sifra=c.polaznik
+        where concat(b.ime, \' \', b.prezime,\' \', ifnull(b.oib, \' \')) like :uvjet
         group by a.sifra, b.ime, b.prezime, b.oib, b.email, a.brojugovora
-        order by 3, 2
+        order by 3, 2 
+        limit :od, :rps
         
         '); 
+        $uvjet= '%' . $uvjet . '%';
+        $izraz->bindValue('od', $od, PDO::PARAM_INT);
+        $izraz->bindValue('rps', $rps, PDO::PARAM_INT);
+        $izraz->bindParam('uvjet', $uvjet);
         $izraz->execute();
         return $izraz->fetchAll();
     }

@@ -25,6 +25,7 @@ if($_SERVER['SERVER_ADDR']==='127.0.0.1'){
 return [
     'dev'=>$dev,
     'url'=>$url,
+    'rps'=>10, // rezultata po stranici
     'naslovApp'=>'Edunova APP',
     'baza'=>$baza
 ];

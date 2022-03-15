@@ -20,8 +20,23 @@ class PolaznikController extends AutorizacijaController
     }
     public function index()
     {
+        if(!isset($_GET['stranica'])){
+            $stranica = 1;
+        }else{
+            $stranica = (int)$_GET['stranica'];
+        }
+        if($stranica == 0){
+            $stranica = 1;
+        }
+
+        if(!isset($_GET['uvjet'])){
+            $uvjet = '';
+        }else{
+            $uvjet = $_GET['uvjet'];
+        }
         $this->view->render($this->viewDir . 'index', [
-            'polaznici'=>Polaznik::read()
+            'polaznici'=>Polaznik::read($stranica, $uvjet),
+            'uvjet'=>$_GET['uvjet']
         ]);
     }
 
