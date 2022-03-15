@@ -1,14 +1,14 @@
 <?php
 
-class Predavac
+class Polaznik
 {
     public static function readOne($kljuc)
     {
         $veza = DB::getInstanca();
         $izraz = $veza->prepare('
         
-        select a.sifra, b.ime, b.prezime, b.oib, b.email, a.iban
-        from predavac a
+        select a.sifra, b.ime, b.prezime, b.oib, b.email, a.brojugovora
+        from polaznik a
         inner join osoba b on a.osoba=b.sifra
         where a.sifra=:parametar
         
@@ -25,11 +25,11 @@ class Predavac
         $veza = DB::getInstanca();
         $izraz = $veza->prepare('
         
-        select a.sifra, b.ime, b.prezime, b.oib, b.email, a.iban, count(c.sifra) as grupa
-        from predavac a
+        select a.sifra, b.ime, b.prezime, b.oib, b.email, a.brojugovora, count(c.grupa) as grupa
+        from polaznik a
         inner join osoba b on a.osoba=b.sifra
-        left join grupa c on a.sifra=c.predavac
-        group by a.sifra, b.ime, b.prezime, b.oib, b.email, a.iban
+        left join clan c on a.sifra=c.polaznik
+        group by a.sifra, b.ime, b.prezime, b.oib, b.email, a.brojugovora
         order by 3, 2
         
         '); 
@@ -61,13 +61,13 @@ class Predavac
 
         $izraz = $veza->prepare('
         
-        insert into predavac (osoba, iban) values (:osoba, :iban) 
+        insert into polaznik (osoba, brojugovora) values (:osoba, :brojugovora) 
         
         '); 
 
         $izraz->execute([
             'osoba'=>$zadnjaSifra,
-            'iban'=>$parametri['iban']
+            'brojugovora'=>$parametri['brojugovora']
         ]);
 
         $veza->commit();
@@ -82,7 +82,7 @@ class Predavac
         $izraz = $veza->prepare('
         
         select osoba 
-        from predavac 
+        from polaznik 
         where sifra=:sifra
         
         '); 
@@ -109,14 +109,14 @@ class Predavac
 
         $izraz = $veza->prepare('
         
-        update predavac
-        set iban=:iban
+        update polaznik
+        set brojugovora=:brojugovora
         where sifra=:sifra
         
         '); 
         $izraz->execute([
             'sifra'=>$parametri['sifra'],
-            'iban'=>$parametri['iban']
+            'brojugovora'=>$parametri['brojugovora']
         ]);
         
         $veza->commit();
@@ -129,7 +129,7 @@ class Predavac
         $veza->beginTransaction();
         $izraz = $veza->prepare('
         
-        select osoba from predavac where sifra=:sifra
+        select osoba from polaznik where sifra=:sifra
         
         '); 
         $izraz->execute([
@@ -140,7 +140,7 @@ class Predavac
 
         $izraz = $veza->prepare('
         
-        delete from predavac where sifra=:sifra
+        delete from polaznik where sifra=:sifra
         
         '); 
         $izraz->execute([
