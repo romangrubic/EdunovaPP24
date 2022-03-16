@@ -2,6 +2,23 @@
 
 class Polaznik
 {
+    public static function ukupnoPolaznika($uvjet)
+    {
+        $veza = DB::getInstanca();
+        $izraz = $veza->prepare('
+        
+        select count(a.sifra)
+        from polaznik a
+        inner join osoba b on a.osoba=b.sifra
+        where concat(b.ime, \' \', b.prezime,\' \', ifnull(b.oib, \' \')) like :uvjet
+        
+        '); 
+        $uvjet= '%' . $uvjet . '%';
+        $izraz->bindParam('uvjet', $uvjet);
+        $izraz->execute();
+        return $izraz->fetchColumn();
+    }
+
     public static function readOne($kljuc)
     {
         $veza = DB::getInstanca();

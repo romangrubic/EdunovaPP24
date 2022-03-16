@@ -2,6 +2,35 @@
     <input type="text" name="uvjet" id="uvjet" placeholder="Unesite dio imena, prezimena ili OIB-a" value="<?=$uvjet?>">
     <input type="submit" class="expanded info button" value="Traži">
 </form>
+<nav aria-label="Pagination">
+  <ul class="pagination text-center">
+
+    <?php if($stranica-1 == 0):?>
+        <li class="pagination-previous disabled">Početak</li>
+        <li class="pagination-previous disabled">Prethodna</li>
+    <?php else:?>
+        <li class="pagination-previous "><a href="<?=App::config('url')?>polaznik/index?uvjet=<?=$uvjet?>&stranica=1" aria-label="Start page" title="Povratak na prvu stranicu">Početak</a></li>
+        <li class="pagination-previous "><a href="<?=App::config('url')?>polaznik/index?uvjet=<?=$uvjet?>&stranica=<?=$stranica-1?>" aria-label="Previous page" title="Prethodna stranica">Prethodna</a></li>
+    <?php endif;?>
+    
+    <li class="current"><span class="show-for-sr">Vi ste na stranici</span> <?=$stranica?>/<?=$ukupnoStranica?></li>
+    <!-- <li><a href="#" aria-label="Page 2">2</a></li>
+    <li><a href="#" aria-label="Page 3">3</a></li>
+    <li><a href="#" aria-label="Page 4">4</a></li>
+    <li class="ellipsis"></li>
+    <li><a href="#" aria-label="Page 12">12</a></li>
+    <li><a href="#" aria-label="Page 13">13</a></li> -->
+
+    <?php if($stranica == $ukupnoStranica):?>
+        <li class="pagination-next disabled">Sljedeća</li>
+        <li class="pagination-next disabled">Kraj</li>
+    <?php else:?>
+        <li class="pagination-next"><a href="<?=App::config('url')?>polaznik/index?uvjet=<?=$uvjet?>&stranica=<?=$stranica+1?>" aria-label="Next page" title="Sljedeća stranica">Sljedeća</a></li>
+        <li class="pagination-next "><a href="<?=App::config('url')?>polaznik/index?uvjet=<?=$uvjet?>&stranica=<?=$ukupnoStranica?>" aria-label="Final page" title="Idi na zadnju stranicu">Kraj</a></li>
+    <?php endif;?>
+
+  </ul>
+</nav>
 <div class="grid-x grid-padding-x">
     <?php include 'dodajNovi.phtml';?>
     <?php foreach($polaznici as $polaznik): ?>

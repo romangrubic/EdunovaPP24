@@ -34,9 +34,19 @@ class PolaznikController extends AutorizacijaController
         }else{
             $uvjet = $_GET['uvjet'];
         }
+
+        $up = Polaznik::ukupnoPolaznika($uvjet);
+        $ukupnoStranica = ceil($up / App::config('rps'));
+
+        if($stranica>$ukupnoStranica){
+            $stranica = $ukupnoStranica;
+        }
+
         $this->view->render($this->viewDir . 'index', [
             'polaznici'=>Polaznik::read($stranica, $uvjet),
-            'uvjet'=>$_GET['uvjet']
+            'uvjet'=>$uvjet,
+            'stranica'=>$stranica,
+            'ukupnoStranica'=>$ukupnoStranica
         ]);
     }
 
