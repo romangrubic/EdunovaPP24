@@ -43,7 +43,10 @@ class GrupaController extends AutorizacijaController
             'poruka'=>'Promjenite podatke',
             'e'=>$this->entitet,
             'smjerovi'=>Smjer::read(),
-            'predavaci'=>Predavac::read()
+            'predavaci'=>Predavac::read(),
+            'css'=>'<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">',
+            'javascript'=>'<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+            <script src="' . App::config('url') . 'public/js/detaljiGrupe.js"></script>'
         ]);
     }
 

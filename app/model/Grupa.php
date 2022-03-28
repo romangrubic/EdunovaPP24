@@ -30,7 +30,20 @@ class Grupa
         
         '); 
         $izraz->execute(['parametar'=>$kljuc]);
-        return $izraz->fetch();
+        $grupa= $izraz->fetch();
+        
+        $izraz = $veza->prepare('
+        
+            select b.sifra, c.ime, c.prezime
+            from clan a
+            inner join polaznik b on a.polaznik =b.sifra 
+            inner join osoba c on b.osoba =c.sifra 
+            where a.grupa = :parametar;
+        
+        '); 
+        $izraz->execute(['parametar'=>$grupa->sifra]);
+        $grupa->polaznici=$izraz->fetchAll();
+        return $grupa;
     }
 
     // CRUD
