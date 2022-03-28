@@ -2,6 +2,14 @@
     <input type="text" name="uvjet" id="uvjet" placeholder="Unesite dio imena, prezimena ili OIB-a" value="<?=$uvjet?>">
     <input type="submit" class="expanded info button" value="Traži">
 </form>
+<form action="<?=App::config('url')?>polaznik/setRPS" method="post">
+    <p>Namjesti prikazivanje polaznika po stranici</p>
+    <select name="broj" id="broj" onchange="this.form.submit()">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+    </select>
+</form>
 <nav aria-label="Pagination">
   <ul class="pagination text-center">
 
